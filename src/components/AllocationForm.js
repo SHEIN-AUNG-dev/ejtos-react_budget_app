@@ -2,11 +2,12 @@ import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const AllocationForm = (props) => {
-    const { dispatch,remaining  } = useContext(AppContext);
-
+    const { dispatch,remaining,currency } = useContext(AppContext);
+    const [newCurrency, setCurrency] = useState(currency);
     const [name, setName] = useState('');
     const [cost, setCost] = useState('');
     const [action, setAction] = useState('');
+    
 
     const submitEvent = () => {
 
@@ -32,6 +33,18 @@ const AllocationForm = (props) => {
                 });
             }
     };
+    const handleCurrencyChange = (event) => {
+        setCurrency(event.target.value);
+        console.log(event.target.value);
+       
+       
+        dispatch({
+            type: 'CHG_CURRENCY',
+            payload: newCurrency,
+        });
+    };
+        
+   
 
     return (
         <div>
@@ -57,13 +70,23 @@ const AllocationForm = (props) => {
                         <option defaultValue value="Add" name="Add">Add</option>
                         <option value="Reduce" name="Reduce">Reduce</option>
                   </select>
-
-                    <input
+                  <div className="input-group-prepend" style={{ marginLeft: '2rem' }}>
+                    <label className="input-group-text" htmlFor="inputGroupSelect03">Currency</label>
+                    </div>
+                  <select className="custom-select" id="inputGroupSelect03" onChange={handleCurrencyChange}>
+                        <option defaultValue value="$" name="Dollar">$ Dollar</option>
+                        <option value="£" name="Pound">£ Pound</option>
+                        <option value="€" name="Euro">€ Euro</option>
+                        <option value="₹" name="Ruppee">₹ Ruppee</option>
+                  </select>
+                  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                  <span>{newCurrency}</span>
+                    <input 
                         required='required'
                         type='number'
                         id='cost'
                         value={cost}
-                        style={{ marginLeft: '2rem' , size: 10}}
+                        style={{ marginLeft: '1rem' , size: 10}}
                         onChange={(event) => setCost(event.target.value)}>
                         </input>
 
