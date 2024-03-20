@@ -37,10 +37,9 @@ const AllocationForm = (props) => {
         setCurrency(event.target.value);
         console.log(event.target.value);
        
-       
         dispatch({
             type: 'CHG_CURRENCY',
-            payload: newCurrency,
+            payload: event.target.value,
         });
     };
         
@@ -74,8 +73,8 @@ const AllocationForm = (props) => {
                     <label className="input-group-text" htmlFor="inputGroupSelect03">Currency</label>
                     </div>
                   <select className="custom-select" id="inputGroupSelect03" onChange={handleCurrencyChange}>
-                        <option defaultValue value="$" name="Dollar">$ Dollar</option>
-                        <option value="£" name="Pound">£ Pound</option>
+                        <option defaultValue value="£" name="Dollar">£ Pound</option>
+                        <option value="$" name="Pound">$ Dollar</option>
                         <option value="€" name="Euro">€ Euro</option>
                         <option value="₹" name="Ruppee">₹ Ruppee</option>
                   </select>
